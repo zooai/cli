@@ -5,13 +5,17 @@ on:
   pull_request:
     branches: [main]
 
+permissions:
+  contents: read
+  packages: write
+
 env:
   GOPRIVATE: "github.com/luxfi/*"
   GONOSUMDB: "github.com/luxfi/*"
   GONOSUMCHECK: "github.com/luxfi/*"
 
 jobs:
-  build:
+  build-and-push:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -28,26 +32,22 @@ jobs:
       - run: go build ./...
       - run: go vet ./...
       - run: go test -v ./...
-
-  docker:
-    needs: build
-    if: github.event_name == 'push'
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      packages: write
-    steps:
-      - uses: actions/checkout@v4
-      - uses: docker/login-action@v3
+      - name: Docker login
+        if: github.event_name == 'push'
+        uses: docker/login-action@v3
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
-      - uses: docker/build-push-action@v6
+      - name: Build and push Docker image
+        if: github.event_name == 'push'
+        uses: docker/build-push-action@v6
         with:
+          context: .
           push: true
-          platforms: linux/amd64
           build-args: |
             GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }}
             GITHUB_ACTOR=${{ github.actor }}
-          tags: ghcr.io/zoo-labs/cli:${{ github.ref_name }}
+          tags: |
+            ghcr.io/zoo-labs/cli:${{ github.ref_name }}
+            ghcr.io/zoo-labs/cli:latest
