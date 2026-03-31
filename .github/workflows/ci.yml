@@ -1,57 +1,52 @@
 name: CI
-
 on:
   push:
     branches: [main, dev]
   pull_request:
-    branches: [main, dev]
+    branches: [main]
+
+env:
+  GOPRIVATE: "github.com/luxfi/*"
+  GONOSUMDB: "github.com/luxfi/*"
+  GONOSUMCHECK: "github.com/luxfi/*"
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    env:
-      GOPRIVATE: "github.com/luxfi/*"
-      GONOSUMCHECK: "github.com/luxfi/*"
-      GONOSUMDB: "github.com/luxfi/*"
     steps:
       - uses: actions/checkout@v4
-
       - uses: actions/setup-go@v5
         with:
           go-version: '1.26'
-
-      - name: Build
-        run: go build ./...
-
-      - name: Vet
-        run: go vet ./...
-
-      - name: Test
-        run: go test -v ./...
+      - name: Configure Git for private modules
+        run: git config --global url."https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/".insteadOf "https://github.com/"
+      - name: Regenerate go.sum
+        run: |
+          rm -f go.sum
+          go mod download
+          go mod tidy
+      - run: go build ./...
+      - run: go vet ./...
+      - run: go test -v ./...
 
   docker:
     needs: build
     if: github.event_name == 'push'
     runs-on: ubuntu-latest
-    env:
-      GOPRIVATE: "github.com/luxfi/*"
-      GONOSUMCHECK: "github.com/luxfi/*"
-      GONOSUMDB: "github.com/luxfi/*"
     permissions:
-      contents: read
       packages: write
     steps:
       - uses: actions/checkout@v4
-
       - uses: docker/login-action@v3
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
-
       - uses: docker/build-push-action@v6
         with:
-          context: .
           push: true
           platforms: linux/amd64
+          build-args: |
+            GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }}
+            GITHUB_ACTOR=${{ github.actor }}
           tags: ghcr.io/zoo-labs/cli:${{ github.ref_name }}
