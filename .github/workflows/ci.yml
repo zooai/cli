@@ -32,7 +32,14 @@ jobs:
       - run: go build ./...
       - run: go vet ./...
       - run: go test -v ./...
-      - name: Docker login
+      - name: Docker login to DOCR
+        if: github.event_name == 'push'
+        uses: docker/login-action@v3
+        with:
+          registry: registry.digitalocean.com
+          username: ${{ secrets.DOCR_TOKEN }}
+          password: ${{ secrets.DOCR_TOKEN }}
+      - name: Docker login to GHCR
         if: github.event_name == 'push'
         uses: docker/login-action@v3
         with:
@@ -49,5 +56,7 @@ jobs:
             GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }}
             GITHUB_ACTOR=${{ github.actor }}
           tags: |
+            registry.digitalocean.com/hanzo/zoo-cli:${{ github.ref_name }}
+            registry.digitalocean.com/hanzo/zoo-cli:latest
             ghcr.io/zoo-labs/cli:${{ github.ref_name }}
             ghcr.io/zoo-labs/cli:latest
