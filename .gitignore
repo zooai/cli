@@ -1,0 +1,5 @@
+zoo
+zoo-cli
+*.exe
+.idea/
+.vscode/
