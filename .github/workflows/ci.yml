@@ -9,6 +9,10 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      GOPRIVATE: "github.com/luxfi/*"
+      GONOSUMCHECK: "github.com/luxfi/*"
+      GONOSUMDB: "github.com/luxfi/*"
     steps:
       - uses: actions/checkout@v4
 
@@ -29,6 +33,10 @@ jobs:
     needs: build
     if: github.event_name == 'push'
     runs-on: ubuntu-latest
+    env:
+      GOPRIVATE: "github.com/luxfi/*"
+      GONOSUMCHECK: "github.com/luxfi/*"
+      GONOSUMDB: "github.com/luxfi/*"
     permissions:
       contents: read
       packages: write
