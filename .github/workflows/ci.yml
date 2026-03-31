@@ -46,4 +46,4 @@ jobs:
           context: .
           push: true
           platforms: linux/amd64
-          tags: ghcr.io/zooai/cli:${{ github.ref_name }}
+          tags: ghcr.io/zoo-labs/cli:${{ github.ref_name }}

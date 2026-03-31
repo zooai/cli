@@ -1,4 +1,4 @@
-module github.com/zooai/cli
+module github.com/zoo-labs/cli
 
 go 1.26.1
 
