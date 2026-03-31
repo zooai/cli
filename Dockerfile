@@ -7,9 +7,9 @@ ENV GONOSUMDB=github.com/luxfi/*
 ENV GONOSUMCHECK=github.com/luxfi/*
 RUN git config --global url."https://${GITHUB_ACTOR}:${GITHUB_TOKEN}@github.com/".insteadOf "https://github.com/"
 COPY go.mod ./
-RUN rm -f go.sum && go mod download
+RUN go mod download || true
 COPY . .
-RUN go mod tidy && CGO_ENABLED=0 go build -o zoo-cli .
+RUN rm -f go.sum && go mod tidy && CGO_ENABLED=0 go build -o zoo-cli .
 
 FROM debian:bookworm-slim
 RUN apt-get update && apt-get install -y ca-certificates && rm -rf /var/lib/apt/lists/*
