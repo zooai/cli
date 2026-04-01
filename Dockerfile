@@ -9,7 +9,8 @@ RUN git config --global url."https://${GITHUB_ACTOR}:${GITHUB_TOKEN}@github.com/
 COPY go.mod ./
 RUN go mod download || true
 COPY . .
-RUN rm -f go.sum && go mod tidy && CGO_ENABLED=0 go build -o zoo-cli .
+ENV CGO_ENABLED=0
+RUN rm -f go.sum && go mod tidy && go build -o zoo-cli .
 
 FROM debian:bookworm-slim
 RUN apt-get update && apt-get install -y ca-certificates && rm -rf /var/lib/apt/lists/*
