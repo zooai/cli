@@ -1,7 +1,10 @@
 // Copyright (C) 2026, Zoo Labs Foundation. All rights reserved.
 package cmd
 
-import "github.com/spf13/cobra"
+import (
+	"github.com/spf13/cobra"
+	"github.com/zoo-labs/cli/cmd/networkcmd"
+)
 
 var rootCmd = &cobra.Command{
 	Use:   "zoo",
@@ -15,4 +18,5 @@ func Execute() error {
 func init() {
 	rootCmd.AddCommand(newDeployCmd())
 	rootCmd.AddCommand(newVersionCmd())
+	rootCmd.AddCommand(networkcmd.NewNetworkCmd())
 }
