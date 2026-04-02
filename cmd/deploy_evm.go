@@ -39,8 +39,8 @@ func newDeployEVMCmd() *cobra.Command {
 
 Key loading priority:
   1. KMS -- if --kms-url or KMS_URL is set
-  2. LUX_PRIVATE_KEY env (hex)
-  3. LUX_MNEMONIC env (BIP39) + KEY_INDEX
+  2. PRIVATE_KEY env (hex)
+  3. MNEMONIC env (BIP39) + KEY_INDEX
 
 The command:
   1. Loads a deployer key (KMS > env)
@@ -51,7 +51,7 @@ The command:
 
 Examples:
   # Deploy with mnemonic
-  export LUX_MNEMONIC="know defense ..."
+  export MNEMONIC="your twelve word mnemonic phrase here"
   export KEY_INDEX=1
   zoo deploy evm --uri https://api.lux-dev.network --evm-chain-id 200200
 

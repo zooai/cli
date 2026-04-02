@@ -3,6 +3,7 @@ package cmd
 
 import (
 	"github.com/spf13/cobra"
+	"github.com/zoo-labs/cli/cmd/chaincmd"
 	"github.com/zoo-labs/cli/cmd/networkcmd"
 )
 
@@ -19,4 +20,5 @@ func init() {
 	rootCmd.AddCommand(newDeployCmd())
 	rootCmd.AddCommand(newVersionCmd())
 	rootCmd.AddCommand(networkcmd.NewNetworkCmd())
+	rootCmd.AddCommand(chaincmd.NewChainCmd())
 }
