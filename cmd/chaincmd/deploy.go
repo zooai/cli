@@ -69,9 +69,9 @@ func deployChain(cmd *cobra.Command, args []string) error {
 	// This requires the network to be running (via zoo network start --local)
 	//
 	// TODO: wire to operator — create a LiquidChain/ZooChain CRD that the operator
-	// reconciles into a subnet blockchain deployment
+	// reconciles into a chain deployment
 	fmt.Printf("\nChain %q ready for deployment.\n", name)
-	fmt.Printf("The operator will create the subnet blockchain on the running network.\n")
+	fmt.Printf("The operator will create the chain on the running network.\n")
 	fmt.Printf("Genesis: %s\n", filepath.Join(configDir, "genesis.json"))
 
 	return nil
