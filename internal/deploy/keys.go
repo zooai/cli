@@ -26,7 +26,7 @@ type kmsSecretResponse struct {
 }
 
 // LoadKey loads a secp256k1 private key for P-chain operations.
-// Priority: KMS secret -> LUX_PRIVATE_KEY env -> LUX_MNEMONIC env.
+// Priority: KMS secret -> PRIVATE_KEY env -> MNEMONIC env.
 func LoadKey(kmsURL, kmsToken, secretName string) (*secp256k1.PrivateKey, error) {
 	// 1. KMS
 	if kmsURL != "" {
@@ -34,14 +34,14 @@ func LoadKey(kmsURL, kmsToken, secretName string) (*secp256k1.PrivateKey, error)
 	}
 
 	// 2. Hex private key
-	if keyHex := os.Getenv("LUX_PRIVATE_KEY"); keyHex != "" {
+	if keyHex := os.Getenv("PRIVATE_KEY"); keyHex != "" {
 		return parseHexKey(keyHex)
 	}
 
 	// 3. BIP39 mnemonic
-	mnemonic := os.Getenv("LUX_MNEMONIC")
+	mnemonic := os.Getenv("MNEMONIC")
 	if mnemonic == "" {
-		return nil, fmt.Errorf("set KMS_URL, LUX_PRIVATE_KEY, or LUX_MNEMONIC")
+		return nil, fmt.Errorf("set KMS_URL, PRIVATE_KEY, or MNEMONIC")
 	}
 	return deriveKeyFromMnemonic(mnemonic)
 }
