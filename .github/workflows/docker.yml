@@ -9,5 +9,5 @@ jobs:
   docker:
     uses: hanzoai/.github/.github/workflows/docker-build.yml@main
     with:
-      image: ghcr.io/zoolabs/cli
+      image: ghcr.io/zooai/cli
     secrets: inherit
