@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/zoo-labs/cli/cmd"
+	"github.com/zooai/cli/cmd"
 )
 
 func main() {

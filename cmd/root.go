@@ -3,8 +3,8 @@ package cmd
 
 import (
 	"github.com/spf13/cobra"
-	"github.com/zoo-labs/cli/cmd/chaincmd"
-	"github.com/zoo-labs/cli/cmd/networkcmd"
+	"github.com/zooai/cli/cmd/chaincmd"
+	"github.com/zooai/cli/cmd/networkcmd"
 )
 
 var rootCmd = &cobra.Command{

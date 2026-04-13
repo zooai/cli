@@ -11,7 +11,7 @@ import (
 
 	"github.com/luxfi/ids"
 	"github.com/spf13/cobra"
-	"github.com/zoo-labs/cli/internal/deploy"
+	"github.com/zooai/cli/internal/deploy"
 )
 
 //go:embed genesis_evm.json
