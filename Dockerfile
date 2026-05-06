@@ -1,11 +1,5 @@
 FROM golang:1.26.1-bookworm AS builder
-ARG GITHUB_TOKEN
-ARG GITHUB_ACTOR
 WORKDIR /build
-ENV GOPRIVATE=github.com/luxfi/*
-ENV GONOSUMDB=github.com/luxfi/*
-ENV GONOSUMCHECK=github.com/luxfi/*
-RUN git config --global url."https://${GITHUB_ACTOR}:${GITHUB_TOKEN}@github.com/".insteadOf "https://github.com/"
 COPY go.mod ./
 RUN go mod download || true
 COPY . .
