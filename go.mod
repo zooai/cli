@@ -1,6 +1,6 @@
 module github.com/zooai/cli
 
-go 1.26.1
+go 1.26.3
 
 require (
 	github.com/luxfi/constants v1.4.4
