@@ -11,7 +11,7 @@ import (
 	"github.com/luxfi/crypto/secp256k1"
 	"github.com/luxfi/ids"
 	"github.com/luxfi/math/set"
-	ptxs "github.com/luxfi/protocol/p/txs"
+	ptxs "github.com/luxfi/proto/p/txs"
 	"github.com/luxfi/sdk/info"
 	"github.com/luxfi/sdk/platformvm"
 	"github.com/luxfi/sdk/wallet/primary"
@@ -110,7 +110,7 @@ func deployWithKey(ctx context.Context, cfg DeployConfig, genesisBytes []byte, p
 	}
 
 	wallet, err := primary.MakeWallet(ctx, &primary.WalletConfig{
-		URI: cfg.URI, LUXKeychain: adapter, EthKeychain: adapter,
+		URI: cfg.URI, LUXKeychain: adapter, EVMKeychain: adapter,
 	})
 	if err != nil {
 		return nil, fmt.Errorf("wallet: %w", err)
@@ -157,7 +157,7 @@ func deployWithKey(ctx context.Context, cfg DeployConfig, genesisBytes []byte, p
 		time.Sleep(5 * time.Second)
 
 		wallet, err = primary.MakeWallet(ctx, &primary.WalletConfig{
-			URI: cfg.URI, LUXKeychain: adapter, EthKeychain: adapter,
+			URI: cfg.URI, LUXKeychain: adapter, EVMKeychain: adapter,
 		})
 		if err != nil {
 			return nil, fmt.Errorf("wallet re-sync: %w", err)
@@ -191,7 +191,7 @@ func deployWithKey(ctx context.Context, cfg DeployConfig, genesisBytes []byte, p
 
 	fetchSet := set.Of(chainID)
 	wallet2, err := primary.MakeWallet(ctx, &primary.WalletConfig{
-		URI: cfg.URI, LUXKeychain: adapter, EthKeychain: adapter,
+		URI: cfg.URI, LUXKeychain: adapter, EVMKeychain: adapter,
 		PChainTxsToFetch: fetchSet,
 	})
 	if err != nil {
@@ -212,7 +212,7 @@ func deployWithKey(ctx context.Context, cfg DeployConfig, genesisBytes []byte, p
 	// Add validators to the chain.
 	if len(validators) > 0 {
 		wallet3, err := primary.MakeWallet(ctx, &primary.WalletConfig{
-			URI: cfg.URI, LUXKeychain: adapter, EthKeychain: adapter,
+			URI: cfg.URI, LUXKeychain: adapter, EVMKeychain: adapter,
 		})
 		if err != nil {
 			logf("WARNING: validator wallet sync: %v", err)
