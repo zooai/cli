@@ -116,7 +116,7 @@ func deployWithKey(ctx context.Context, cfg DeployConfig, genesisBytes []byte, p
 		return nil, fmt.Errorf("wallet: %w", err)
 	}
 
-	luxAssetID := wallet.X().Builder().Context().XAssetID
+	luxAssetID := wallet.X().Builder().Context().UTXOAssetID
 	pBalance, err := wallet.P().Builder().GetBalance()
 	if err != nil {
 		return nil, fmt.Errorf("P-chain balance: %w", err)
