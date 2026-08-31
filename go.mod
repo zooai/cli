@@ -4,7 +4,7 @@ go 1.26.4
 
 require (
 	github.com/luxfi/constants v1.6.2
-	github.com/luxfi/crypto v1.20.2
+	github.com/luxfi/crypto v1.20.5
 	github.com/luxfi/go-bip32 v1.1.0
 	github.com/luxfi/go-bip39 v1.2.0
 	github.com/luxfi/ids v1.3.2
@@ -16,7 +16,7 @@ require (
 )
 
 require (
-	github.com/luxfi/threshold v1.12.3 // indirect
+	github.com/luxfi/threshold v1.12.6 // indirect
 	github.com/luxfi/zapcodec v1.1.1 // indirect
 )
 
@@ -44,20 +44,20 @@ require (
 	github.com/holiman/uint256 v1.3.2 // indirect
 	github.com/inconshreveable/mousetrap v1.1.0 // indirect
 	github.com/klauspost/compress v1.18.6 // indirect
-	github.com/luxfi/accel v1.2.4 // indirect
+	github.com/luxfi/accel v1.3.1 // indirect
 	github.com/luxfi/address v1.1.1 // indirect
-	github.com/luxfi/api v1.1.1 // indirect
+	github.com/luxfi/api v1.1.9 // indirect
 	github.com/luxfi/atomic v1.0.0 // indirect
 	github.com/luxfi/cache v1.3.1 // indirect
 	github.com/luxfi/compress v0.1.1 // indirect
 	github.com/luxfi/concurrent v0.1.1 // indirect
-	github.com/luxfi/consensus v1.36.2 // indirect
-	github.com/luxfi/container v0.2.1 // indirect
+	github.com/luxfi/consensus v1.36.81 // indirect
+	github.com/luxfi/container v0.2.2 // indirect
 	github.com/luxfi/crypto/ipa v1.2.4 // indirect
-	github.com/luxfi/database v1.21.1 // indirect
-	github.com/luxfi/evm v1.104.10 // indirect
+	github.com/luxfi/database v1.21.5 // indirect
+	github.com/luxfi/evm v1.104.50 // indirect
 	github.com/luxfi/formatting v1.1.1 // indirect
-	github.com/luxfi/geth v1.20.1 // indirect
+	github.com/luxfi/geth v1.20.2 // indirect
 	github.com/luxfi/keychain v1.1.1 // indirect
 	github.com/luxfi/log v1.4.3 // indirect
 	github.com/luxfi/math/big v0.1.0 // indirect
@@ -77,7 +77,7 @@ require (
 	github.com/luxfi/utils v1.3.1 // indirect
 	github.com/luxfi/validators v1.3.1 // indirect
 	github.com/luxfi/version v1.0.1 // indirect
-	github.com/luxfi/vm v1.3.1 // indirect
+	github.com/luxfi/vm v1.3.16 // indirect
 	github.com/luxfi/warp v1.24.1 // indirect
 	github.com/luxfi/zap v1.2.6 // indirect
 	github.com/mattn/go-colorable v0.1.15 // indirect
