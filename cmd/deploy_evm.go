@@ -119,7 +119,7 @@ func runDeployEVM(cmd *cobra.Command, uri, genesisFile, chainName string, evmCha
 	cmd.Printf("Chain Name:    %s\n", chainName)
 	cmd.Printf("Validators:    %d\n", result.Validators)
 	cmd.Println()
-	cmd.Printf("RPC: %s/v1/bc/%s/rpc\n", uri, result.BlockchainID)
+	cmd.Printf("RPC: %s/v1/chain/%s/rpc\n", uri, result.BlockchainID)
 
 	return nil
 }
