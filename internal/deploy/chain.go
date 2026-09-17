@@ -136,10 +136,8 @@ func deployWithKey(ctx context.Context, cfg DeployConfig, genesisBytes []byte, p
 			_, cErr := wallet.C().IssueExportTx(
 				constants.PlatformChainID,
 				[]*secp256k1fx.TransferOutput{{
-					Amt: 10_000_000_000,
-					OutputOwners: secp256k1fx.OutputOwners{
-						Threshold: 1, Addrs: []ids.ShortID{addr},
-					},
+					Amt:       10_000_000_000,
+					Threshold: 1, Addrs: []ids.ShortID{addr},
 				}},
 			)
 			if cErr != nil {
@@ -228,13 +226,11 @@ func deployWithKey(ctx context.Context, cfg DeployConfig, genesisBytes []byte, p
 			for _, v := range validators {
 				logf("Adding validator %s to chain %s...", v.NodeID, chainID)
 				_, err := wallet3.P().IssueAddChainValidatorTx(&ptxs.ChainValidator{
-					Validator: ptxs.Validator{
-						NodeID: v.NodeID,
-						Start:  uint64(startTime.Unix()),
-						End:    uint64(endTime.Unix()),
-						Wght:   20,
-					},
-					Chain: chainID,
+					NodeID: v.NodeID,
+					Start:  uint64(startTime.Unix()),
+					End:    uint64(endTime.Unix()),
+					Wght:   20,
+					Chain:  chainID,
 				})
 				if err != nil {
 					logf("WARNING: add validator %s: %v", v.NodeID, err)
